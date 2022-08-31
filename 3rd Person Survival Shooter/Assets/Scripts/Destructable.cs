@@ -6,7 +6,7 @@ public class Destructable : MonoBehaviour
 
     [SerializeField] private float startsHitsPoints = 100f;
     [SerializeField] private float hitPoints;
-    // Start is called before the first frame update
+
     void Start()
     {
         hitPoints = startsHitsPoints;
