@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class OnCollisionDestoroy : MonoBehaviour
@@ -7,17 +6,25 @@ public class OnCollisionDestoroy : MonoBehaviour
     [SerializeField] public float bulletDestroyOffset = 1f;
     [SerializeField] public float impactTime = 0.1f;
     [SerializeField] public GameObject flare;
-
+    [SerializeField] public float bulletPower = 10f;
     [Header("Damage Parameters")]
-    [SerializeField] private float damage;
+    [SerializeField] private float damage = 10f;
     [SerializeField] public GameObject hitEffect;
+    [SerializeField] public float destroyTime = 1f;
+
 
     public float Damage
     {
         get { return damage; }
-        set { damage = value; }
-    }
+        set
+        {
+            if (value >= damage)
+            {
+                damage = value;
+            }
+        }
 
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (Time.time >= bulletDestroyOffset)
@@ -25,14 +32,13 @@ public class OnCollisionDestoroy : MonoBehaviour
             if (collision.gameObject.layer == 7)
             {
                 EnemyHit(collision);
-                //анимация столкновения с enemy
+                CollisionWithEnemyEffect(collision);
             }
             else
             {
-                // анимация столконвения со стеной
+                CollisionWithWallEffect(collision);
             }
 
-            CollisionWithWallEffect(collision);
         }
 
     }
@@ -44,17 +50,25 @@ public class OnCollisionDestoroy : MonoBehaviour
         if (target != null)
         {
             target.Hit(Damage);
+
+        }
+        if (target != null)
+        {
+            //Vector3 direction = collisionInfo.gameObject.GetComponent<Rigidbody>().velocity.normalized;
+            //collisionInfo.articulationBody.GetComponent<Rigidbody>().AddForce(direction * bulletPower);
         }
         Destroy(gameObject);
 
-        EnemyHitEffect(collisionInfo);
+
     }
-    private void EnemyHitEffect(Collision collisionInfo)
+    private void CollisionWithEnemyEffect(Collision collision)
     {
-        GameObject hitEffect = Instantiate(flare, collisionInfo.contacts[1].point, Quaternion.LookRotation(collisionInfo.contacts[1].normal)) as GameObject;
-        Destroy(hitEffect, impactTime);
+
+        Destroy(gameObject);
+
+        GameObject effect = Instantiate(hitEffect, collision.contacts[1].point, Quaternion.LookRotation(collision.contacts[1].normal)) as GameObject;
+        Destroy(effect, destroyTime);
     }
-    
 
     private void CollisionWithWallEffect(Collision collision)
     {
@@ -63,3 +77,4 @@ public class OnCollisionDestoroy : MonoBehaviour
         Destroy(flareGO, impactTime);
     }
 }
+
