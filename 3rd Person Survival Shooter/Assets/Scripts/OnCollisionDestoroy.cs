@@ -7,10 +7,16 @@ public class OnCollisionDestoroy : MonoBehaviour
     [SerializeField] public float bulletDestroyOffset = 1f;
     [SerializeField] public float impactTime = 0.1f;
     [SerializeField] public GameObject flare;
-
+    [SerializeField] public float bulletPower = 10f;
     [Header("Damage Parameters")]
     [SerializeField] private float damage;
     [SerializeField] public GameObject hitEffect;
+<<<<<<< Updated upstream
+=======
+    [SerializeField] public float destroyTime = 1f;
+
+
+>>>>>>> Stashed changes
     public float Damage
     {
         get { return damage; }
@@ -29,7 +35,12 @@ public class OnCollisionDestoroy : MonoBehaviour
         {
             if (collision.gameObject.layer == 7)
             {
+<<<<<<< Updated upstream
                 EnemyHit(collision); 
+=======
+                EnemyHit(collision);
+                CollisionWithEnemyEffect(collision);
+>>>>>>> Stashed changes
             }
             else
             {
@@ -47,17 +58,25 @@ public class OnCollisionDestoroy : MonoBehaviour
         if (target != null)
         {
             target.Hit(Damage);
+
+        }
+        if (target != null)
+        {
+            //Vector3 direction = collisionInfo.gameObject.GetComponent<Rigidbody>().velocity.normalized;
+            //collisionInfo.articulationBody.GetComponent<Rigidbody>().AddForce(direction * bulletPower);
         }
         Destroy(gameObject);
 
-        EnemyHitEffect(collisionInfo);
+
     }
-    private void EnemyHitEffect(Collision collisionInfo)
+    private void CollisionWithEnemyEffect(Collision collision)
     {
-        GameObject hitEffect = Instantiate(flare, collisionInfo.contacts[1].point, Quaternion.LookRotation(collisionInfo.contacts[1].normal)) as GameObject;
-        Destroy(hitEffect, impactTime);
+
+        Destroy(gameObject);
+
+        GameObject effect = Instantiate(hitEffect, collision.contacts[1].point, Quaternion.LookRotation(collision.contacts[1].normal)) as GameObject;
+        Destroy(effect, destroyTime);
     }
-    
 
     private void CollisionWithWallEffect(Collision collision)
     {

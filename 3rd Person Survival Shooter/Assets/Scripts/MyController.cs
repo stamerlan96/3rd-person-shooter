@@ -19,7 +19,12 @@ public class MyController : MonoBehaviour
     [SerializeField] public float fireRate = 15f;
     [SerializeField] public float destroyOffset = 1f;
     [SerializeField] public float shootingTime = 0.1f;
+<<<<<<< Updated upstream
     [SerializeField] public float bulletDamage = 1f;
+=======
+    [SerializeField] public float bulletDamage = 10f;
+    [SerializeField] public float bulletPower = 10f;
+>>>>>>> Stashed changes
     [SerializeField] public GameObject shootParticles;
     private float nextTimeToFire = 0f;
 

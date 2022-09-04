@@ -128,5 +128,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDestroyOffset: 1
-  impactTime: 0.1
+  impactTime: 0.2
   flare: {fileID: 8633143468494889902, guid: 171e76c6ea8c53f48a2a709630c4e7a0, type: 3}
+<<<<<<< Updated upstream
+=======
+  damage: 1
+  hitEffect: {fileID: 100000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
+  destroyTime: 0.2
+>>>>>>> Stashed changes
