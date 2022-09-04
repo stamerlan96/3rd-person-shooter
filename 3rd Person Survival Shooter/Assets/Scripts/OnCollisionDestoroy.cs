@@ -11,31 +11,28 @@ public class OnCollisionDestoroy : MonoBehaviour
     [Header("Damage Parameters")]
     [SerializeField] private float damage;
     [SerializeField] public GameObject hitEffect;
+
     public float Damage
     {
         get { return damage; }
-        set
-        {
-            if (value >= damage)
-            {
-                damage = value;
-            }
-        }
-
+        set { damage = value; }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (Time.time >= bulletDestroyOffset)
         {
             if (collision.gameObject.layer == 7)
             {
-                EnemyHit(collision); 
+                EnemyHit(collision);
+                //анимация столкновения с enemy
             }
             else
             {
-                CollisionWithWallEffect(collision);
+                // анимация столконвения со стеной
             }
 
+            CollisionWithWallEffect(collision);
         }
 
     }

@@ -130,3 +130,5 @@ MonoBehaviour:
   bulletDestroyOffset: 1
   impactTime: 0.1
   flare: {fileID: 8633143468494889902, guid: 171e76c6ea8c53f48a2a709630c4e7a0, type: 3}
+  damage: 1
+  hitEffect: {fileID: 0}

@@ -19,7 +19,7 @@ public class MyController : MonoBehaviour
     [SerializeField] public float fireRate = 15f;
     [SerializeField] public float destroyOffset = 1f;
     [SerializeField] public float shootingTime = 0.1f;
-    [SerializeField] public float bulletDamage = 1f;
+    [SerializeField] public float bulletDamage = 10f;
     [SerializeField] public GameObject shootParticles;
     private float nextTimeToFire = 0f;
 
@@ -105,7 +105,7 @@ public class MyController : MonoBehaviour
             onGround = true;
         }
     }
-
+  
     private bool ChechIsOnTheGround(Collision collisionInfo, float slope)
     {
         for (int i = 0; i < collisionInfo.contacts.Length; i++)
@@ -138,26 +138,16 @@ public class MyController : MonoBehaviour
 
         if (plane.Raycast(ray, out distance))
         {
-            Vector3 position = ray.GetPoint(distance);;
-            position.y = transform.position.y;
+            Vector3 position = ray.GetPoint(distance);
             transform.LookAt(position);
         }
-        /*
-        RaycastHit hitInfo;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hitInfo))
-        {
-            Vector3 position = ray.GetPoint(hitInfo.distance);
-            position.y = transform.position.y;
-            transform.LookAt(position);
-        }*/
     }
 
     private void Shoot()
     {
         GameObject newBullet = Instantiate(bulletPrefab, gun.position, gun.rotation) as GameObject;
         newBullet.GetComponent<Rigidbody>().AddForce(gun.forward * shootPower);
+        newBullet.GetComponent<OnCollisionDestoroy>().Damage = bulletDamage;
         GameObject shellsGO = Instantiate(shootParticles, gun.position, gun.rotation * Quaternion.AngleAxis(90f, Vector3.up)) as GameObject;
         Destroy(shellsGO, shootingTime);
         Destroy(newBullet, 2);
