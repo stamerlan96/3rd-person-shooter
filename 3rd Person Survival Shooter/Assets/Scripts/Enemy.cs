@@ -37,24 +37,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void ChackTargetVisibility()
-    {
-        Vector3 targetDirection = target.position - gun.position;
+    /// <summary> 
+    
+    ///private void ChackTargetVisibility()
+    ///{
+    ///    Vector3 targetDirection = target.position - gun.position;
 
-        Ray ray = new Ray(gun.position, targetDirection);
+    //    Ray ray = new Ray(gun.position, targetDirection);
 
-        RaycastHit hit;
+      //  RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.transform == target)
-            {
-                seeTarget = true;
-                return;
-            }
-        }
+        //if (Physics.Raycast(ray, out hit))
+        //{
+          //  if (hit.transform == target)
+            //{
+              //  seeTarget = true;
+               // return;
+            //}
+        //}
 
-        seeTarget = false;
-    }
-
+        //seeTarget = false;
+    //}
+    /// </summary>
 }
