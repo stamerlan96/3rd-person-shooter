@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MyController : MonoBehaviour
 {
@@ -69,6 +70,11 @@ public class MyController : MonoBehaviour
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
         }
+    }
+
+    private void Destroyed()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void ApplyMovementForce()

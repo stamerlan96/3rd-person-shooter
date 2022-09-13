@@ -127,7 +127,7 @@ Material:
     - _OcclusionChannel: 0
     - _OcclusionStrength: 1
     - _Offset: -0.039
-    - _OtlWidth: 4.01
+    - _OtlWidth: 1.46
     - _Outline: 0.00689
     - _OutlineLightingType: 0
     - _OutlineLightingTypeURP: 0
@@ -166,7 +166,7 @@ Material:
     - _SpecularToonSmoothness: 0.05
     - _SpecularType: 0
     - _SrcBlend: 1
-    - _Steps: 6.84
+    - _Steps: 6.8
     - _StpSmooth: 0
     - _UVSec: 0
     - _UseAlphaTest: 0

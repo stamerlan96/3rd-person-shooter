@@ -3,14 +3,15 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
 
-    [SerializeField, Min(0f)] public float spawnDelay=5f;
+    [SerializeField, Min(0f)] public float spawnTime = 2f;
+    [SerializeField, Min(0f)] public float spawnDelay = 5f;
 
     public Enemy enemyPrefab;
 
 
     private void Start()
     {
-        InvokeRepeating("Spawn", 2, spawnDelay);
+        InvokeRepeating("Spawn", spawnDelay, spawnTime);
     }
     public void Spawn()
     {

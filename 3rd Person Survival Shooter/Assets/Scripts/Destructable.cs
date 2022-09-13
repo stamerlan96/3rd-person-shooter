@@ -26,13 +26,14 @@ public class Destructable : MonoBehaviour
 
     private void Die()
     {
+        BroadcastMessage("Destroyed");
         Destroy(gameObject);
         destructionEffect();
     }
 
     private void destructionEffect()
     {
-        GameObject effect = Instantiate(destroyEffect, GetComponent<Transform>().position, GetComponent<Transform>().rotation * Quaternion.AngleAxis(90f, Vector3.up)) as GameObject;
+        GameObject effect = Instantiate(destroyEffect, GetComponent<Transform>().position, GetComponent<Transform>().rotation) as GameObject; ///* Quaternion.AngleAxis(90f, Vector3.up)) as GameObject;
         Destroy(effect, destractioinEfectTime);
     }
 
