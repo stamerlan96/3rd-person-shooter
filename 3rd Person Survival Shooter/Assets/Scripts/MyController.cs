@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MyController : MonoBehaviour
+public class MyController : Character
 {
     [Header("Parameters")]
     [SerializeField] private float movingForce = 20.0f;
@@ -68,7 +68,7 @@ public class MyController : MonoBehaviour
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + 1f / fireRate;
-            Shoot();
+            ShootBullet();
         }
     }
 
@@ -145,24 +145,5 @@ public class MyController : MonoBehaviour
             position.y = transform.position.y;
             transform.LookAt(position);
         }
-        /*
-        RaycastHit hitInfo;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hitInfo))
-        {
-            Vector3 position = ray.GetPoint(hitInfo.distance);
-            position.y = transform.position.y;
-            transform.LookAt(position);
-        }*/
-    }
-
-    private void Shoot()
-    {
-        GameObject newBullet = Instantiate(bulletPrefab, gun.position, gun.rotation) as GameObject;
-        newBullet.GetComponent<Rigidbody>().AddForce(gun.forward * shootPower);
-        GameObject shellsGO = Instantiate(shootParticles, gun.position, gun.rotation * Quaternion.AngleAxis(90f, Vector3.up)) as GameObject;
-        Destroy(shellsGO, shootingTime);
-        Destroy(newBullet, 2);
     }
 }

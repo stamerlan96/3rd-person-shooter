@@ -1,23 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
 
     private NavMeshAgent _navMeshAgent;
 
     private Transform target;
     private bool seeTarget;
-    [Header("Shooting Parameters")]
-
-    [SerializeField] public float shootPower = 10f;
-    [SerializeField] public float fireRate = 15f;
-    [SerializeField] public float destroyOffset = 1f;
-    [SerializeField] public float shootingTime = 0.1f;
-
-    public GameObject bulletPrefab;
-    public Transform gun;
-
+  
     public Transform Target
     {
         get => target;
@@ -32,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("ShootEnemy", 2f, fireRate);
+        InvokeRepeating("Shoot", 2f, fireRate);
     }
 
     void Update()
@@ -50,19 +41,20 @@ public class Enemy : MonoBehaviour
         
         
     }
-    private void ShootEnemy()
+    private void Shoot()
     {
         if (seeTarget)
         {
-            GameObject newBullet = Instantiate(bulletPrefab, gun.position, gun.rotation) as GameObject;
-            Vector3 targetDirection = target.position - gun.position;
+            Vector3 targetDirection = target.position - gun.transform.position;
+
             targetDirection.Normalize();
-            newBullet.GetComponent<Rigidbody>().AddForce(targetDirection * shootPower);
-            Destroy(newBullet, 4);
-        }
+ 
+		    ShootBullet();
+	    }
     }
 
-        private void CheckTargetVisibility()
+
+    private void CheckTargetVisibility()
     {
         Vector3 targetDirection = target.position - gun.position;
 
